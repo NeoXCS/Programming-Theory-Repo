@@ -7,7 +7,8 @@ using Unity.VisualScripting;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager Instance;
+    public static MainManager Instance {get;private set;}
+    public int lives = 2;
 
     private void Awake()
     {
@@ -34,5 +35,18 @@ public class MainManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    public void LoseLife()
+    {
+        if(lives > 0)
+        {
+            lives -= 1;
+        }
+        else
+        {
+            lives = 0;
+            //Gameover Here
+        }
     }
 }

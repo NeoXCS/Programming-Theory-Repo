@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager Instance {get;private set;}
+    public static MainManager Instance {get;private set;} //Encapsulation
     public int lives = 2;
 
     private void Awake()

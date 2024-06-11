@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     protected Animator enemyAnim;
     protected Collider enemyCollider;
     protected bool enemyDead = false;
+    [SerializeField]private AudioClip[] zombieSounds;
+    private AudioSource zombieSoundSource;
     
 
     // Start is called before the first frame update
@@ -15,6 +17,10 @@ public class Enemy : MonoBehaviour
     {
         enemyAnim = gameObject.GetComponent<Animator>();
         enemyCollider = gameObject.GetComponent<Collider>();
+        //zombieSoundSource = gameObject.GetComponent<AudioSource>();
+        //int zombieSoundIndex = Random.Range(0, zombieSounds.Length);
+        //zombieSoundSource.clip = zombieSounds[zombieSoundIndex];
+        //zombieSoundSource.Play();
 
     }
 

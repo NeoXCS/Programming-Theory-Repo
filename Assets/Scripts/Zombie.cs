@@ -9,4 +9,6 @@ public class Zombie : Enemy
    {
      gameObject.transform.Translate(Vector3.forward * enemySpeed * zombieSpeed * Time.deltaTime); //Polymorphism
    }
+
+
 }

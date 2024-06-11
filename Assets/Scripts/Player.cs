@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
    private float horizontalInput;
-   [SerializeField] private float speed = 15.0f;
+   [SerializeField] private float speed = 25.0f;
    [SerializeField] private float xRange = 25.0f;
    [SerializeField] private GameObject projectilePrefab;
    private bool canShoot = true;

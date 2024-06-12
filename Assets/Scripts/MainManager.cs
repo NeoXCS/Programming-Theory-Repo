@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using TMPro;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MainManager : MonoBehaviour
 {
@@ -30,21 +33,36 @@ public class MainManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            #if UNITY_EDITOR
+                EditorApplication.ExitPlaymode();
+            #else
+                Application.Quit();
+            #endif
+        }
+    }
+
 
     public void LoseLife()
     {
-        if(lives > 0)
+        if (!gameOver)
         {
-            lives -= 1;
-            livesText.text = "Lives: " + lives;
+            if (lives > 0)
+            {
+                lives -= 1;
+                livesText.text = "Lives: " + lives;
 
-        }
-        else
-        {
-            lives = 0;
-            crowdScream.Play();
-            gameOverText.SetActive(true);
-            gameOver = true;
+            }
+            else
+            {
+                lives = 0;
+                crowdScream.Play();
+                gameOverText.SetActive(true);
+                gameOver = true;
+            }
         }
     }
 }

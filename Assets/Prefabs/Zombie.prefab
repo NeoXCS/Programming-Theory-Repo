@@ -989,11 +989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f56da26916c1494d81357303630ad3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieSounds:
-  - {fileID: 8300000, guid: 934fe701a479b45289f84c86c7e812bf, type: 3}
-  - {fileID: 8300000, guid: 3c0f2bc84ef414d24b41a694eb6a7a25, type: 3}
-  - {fileID: 8300000, guid: a1a2cd1a1ef9d4e35928d1a71c954f3b, type: 3}
-  - {fileID: 8300000, guid: 7d8cc45091a4447d3a2684483ee6cca2, type: 3}
 --- !u!65 &-1992902280935435037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1025,8 +1020,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 0e289649262c65c42a4c04f1a9cec8b3, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

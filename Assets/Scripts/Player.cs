@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
    [SerializeField] private float speed = 25.0f;
    [SerializeField] private float xRange = 25.0f;
    [SerializeField] private GameObject projectilePrefab;
+   private AudioSource shootAudio;
    private bool canShoot = true;
    private Animator playerAnim;
    
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAnim = gameObject.GetComponent<Animator>();
+        shootAudio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,15 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+            if(MainManager.Instance.gameOver == false)
+            {
+                Shoot();
+            }
+            else
+            {
+                MainManager.Instance.gameOver = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
 
@@ -55,6 +66,8 @@ public class Player : MonoBehaviour
             Instantiate(projectilePrefab, projectileSpawn, projectilePrefab.transform.rotation);
 
             playerAnim.SetTrigger("Shoot");
+
+            shootAudio.Play();
 
             canShoot = false;
 

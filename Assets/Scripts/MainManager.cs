@@ -1,52 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance {get;private set;} //Encapsulation
     public int lives = 2;
+    public int score = 0;
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI scoreText;
+    public GameObject gameOverText;
+    public bool gameOver = false;
+    private AudioSource crowdScream;
 
     private void Awake()
     {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+       // if(Instance != null)
+      //  {
+         //   Destroy(gameObject);
+          //  return;
+        //}
 
         Instance = this;
+        crowdScream = gameObject.GetComponent<AudioSource>();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void ExitGame()
-    {
-        #if UNITY_EDITOR
-            EditorApplication.ExitPlaymode();
-        #else
-            Application.Quit();
-        #endif
-    }
 
     public void LoseLife()
     {
         if(lives > 0)
         {
             lives -= 1;
+            livesText.text = "Lives: " + lives;
+
         }
         else
         {
             lives = 0;
-            //Gameover Here
+            crowdScream.Play();
+            gameOverText.SetActive(true);
+            gameOver = true;
         }
     }
 }

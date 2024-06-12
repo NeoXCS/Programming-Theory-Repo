@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     protected Animator enemyAnim;
     protected Collider enemyCollider;
     protected bool enemyDead = false;
-    [SerializeField]private AudioClip[] zombieSounds;
     private AudioSource zombieSoundSource;
     
 
@@ -17,10 +16,7 @@ public class Enemy : MonoBehaviour
     {
         enemyAnim = gameObject.GetComponent<Animator>();
         enemyCollider = gameObject.GetComponent<Collider>();
-        //zombieSoundSource = gameObject.GetComponent<AudioSource>();
-        //int zombieSoundIndex = Random.Range(0, zombieSounds.Length);
-        //zombieSoundSource.clip = zombieSounds[zombieSoundIndex];
-        //zombieSoundSource.Play();
+        zombieSoundSource = gameObject.GetComponent<AudioSource>();
 
     }
 
@@ -40,11 +36,16 @@ public class Enemy : MonoBehaviour
 
      void OnTriggerEnter(Collider other)
    {
-    //Destroy(gameObject);
-    enemyAnim.SetTrigger("Dead");
-    Destroy(enemyCollider);
-    enemyDead = true;
-    StartCoroutine(DeadDisappear());
+    if(other.gameObject.CompareTag("Projectile"))
+    {
+        zombieSoundSource.Play();
+        enemyAnim.SetTrigger("Dead");
+        Destroy(enemyCollider);
+        enemyDead = true;
+        MainManager.Instance.score += 1;
+        MainManager.Instance.scoreText.text = "Score: " + MainManager.Instance.score;
+        StartCoroutine(DeadDisappear());
+    }
    }
 
    IEnumerator DeadDisappear()

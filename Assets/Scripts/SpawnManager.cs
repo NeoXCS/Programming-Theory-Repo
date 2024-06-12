@@ -25,9 +25,12 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnRandomZombie()
     {
+        if(MainManager.Instance.gameOver == false)
+        {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0 , spawnPosZ);
             int zombieIndex = Random.Range(0, zombiePrefabs.Length);
             Instantiate(zombiePrefabs[zombieIndex], spawnPos, zombiePrefabs[zombieIndex].transform.rotation);
+        }
     }
 
 }
